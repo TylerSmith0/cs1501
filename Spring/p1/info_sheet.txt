@@ -1,0 +1,52 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  Tyler Smith
+
+Lecture section:  MW 9:30am-10:45am (26687)
+
+Recitation day and time:  F 4:00pm
+
+Assignment #:  1
+
+Program due date:  2-4-2020
+
+Handed in date:  1-30-2020
+
+Source code file name(s):
+
+DLB.java
+DLB.class
+Node.java
+Node.class
+LinkedList.java
+LinkedList.class
+ac_test.java
+
+
+Other file name(s) (if relevant):
+
+info_sheet.txt
+approach.txt
+
+Does your program run without error?: No
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+
+Currently, the user history is not sorted by frequency, just by order of entry.
+Working on that update now.
+
+
+Additional comments to the grader:
+
+
+
+
+

@@ -1,0 +1,210 @@
+~~~~ DOCUMENTATION.TXT ~~~~~
+
+Tyler Smith -- March 26th, 2020
+CS 1501 Project 3
+_________________________________________________________________________________________
+
+RUNTIMES:
+
+
+Heap-Backed Data Structure:
+
+	The information on the cars entered into the database is kept in a priority
+	queue backed by a heap. The nature of a heap requires that parents be of 
+	higher-priority than their children, but the siblings in a heap do not need
+	to maintain any type of relation, ONLY to their parent and children.
+
+	This allows for the following operations runtimes:
+
+
+	Insert:
+	  Insert operations are conducted in an O(lg n) manner. This is because of 
+	  the nature of a heap-based data structure. The priority queue's heap has
+	  to make a decision based off of only parent-child relations, not sibling
+	  relations. This means that the insert operation needs to traverse (in the
+	  worst case) the full height of the heap if it adds at the base and swims
+	  the leaves. The height of the heap is proportional to the log of the 
+	  inputs (Cars entered), which means h ~ lg(n) . As said, in the worst-case,
+	  the insert moves up the height of the tree, which means that the heap is 
+	  O(h), or substituting in the proportion above, O(lg n), as the project 
+	  description requires.
+
+	Retrieval:
+	  Retrieval operations are done by returning a copy of the entry located at
+	  index 1 of the Priority Queue array. This is acheived by fast-indexing of 
+	  arrays, and allows for a worst-case runtime of retrieval to be O(1), which
+	  also means the retrieval is O(lg n), as required by the project doc.
+
+	Removal:
+	  Removal is broken into four steps: finding the entry, swapping it with the
+	  last index of the PQ, decrementing the size of the PQ, and sink/swimming 
+	  the swapped entry. The finding of the entry is done by an indirection table,
+	  which will be covered in more detail in the 'Indirection' section below.
+	  For the sake of simplicity, we are to assume the table allows for finding 
+	  an entry in O(1) time. Next is swapping the last index of the PQ with the 
+	  found entry to be removed, which is done by simply creating a temporary 
+	  copy of the car to be removed, and placing the last index in the PQ array
+	  where the car used to be. This can be done in O(1) time again due to the 
+	  nature of fast-indexing in arrays. The third step is to decrement the size
+	  of the PQ, which is done by simply 'nulling' the last entry with a simple 
+	  assignment statement and decrementing the size variable of the PQ, both of
+	  which are done in O(1) time due to fast-indexing and holding a size variable
+	  in the data structure. Finally, the entry that was exchanged with the car
+	  that was removed must be sunk down to retain the heap-property. Much like 
+	  the insertion, no relation needs to be held between siblings, just that the
+	  parent is of higher priority than both of it's children. So, in the worst 
+	  case, the entry to be sunk could be at the root of the heap, meaning that 
+	  it needs to be sunk down all the way to the leaf. This will result in the 
+	  heap needing to conduct work proportional to the height of the heap in 
+	  comparisons and swaps, which as previously stated means a runtime of 
+	  O(lg n), like the proposal document requires. When adding up all the worst-
+	  case runtimes of the removal, we get O(1) + O(1) + O(1) + O(lg n), and by
+	  dropping lower-order terms, we are left with a runtime of O(lg n). Again,
+	  the 'finding' of the entry is covered in the 'Indirection' section of this
+	  document, and justifies us calling the find operation constant.
+
+	Updating:
+	  Much like removal, the update process is broken into steps: finding the 
+	  entry, creating a new Car object, replacing it in the PQ at the location,
+	  and sink/swimming the new entry. The first step, finding the entry, will
+	  be covered in the 'Indirection' section below, and as such will be O(1)
+	  for the time being. The next step, creating a new Car object, is done by
+	  instantiating a new Car and adding the applicable fields once the entry to
+	  be updated is found, and hence since is just simple assignment statements
+	  is also O(1). The replacing of the new entry in the old entry's spot of the
+	  PQ is also O(1) worst-case because of the nature of fast-indexing in arrays.
+	  Finally, the longest aspect of the runtime comes in the sinking and swimming
+	  of the new entry. In the worst-case, this will result in either sinking the
+	  root to the bottom of the heap, OR swimming the leaf to the root of the heap,
+	  resulting in work proportional to the height of the heap. With the height 
+	  of the heap being proportional to the log of the input size, this results 
+	  in a final worst-case runtime of updating to be O(lg n), like the project 
+	  description requires.
+
+
+
+Indirection:
+
+	An indirection table was used to supplement the priority queue to allow the
+	finding of elements to be constant-time with respect to the input of the 
+	application. For my implementation of an indirection table, I decided to 
+	utilize the differences between cars, specifically the fact that every car
+	has a unique VIN number. Although this would allow for a case of perfect
+	hashing, the keyspace for the VIN numbers is far too large to feasibly create
+	an array that's larger than the keyspace. As such, it was decided that closed
+	addressed hashing would be implemented to not only ensure the proper entries 
+	were found, but that they were found in a speedy manner. This was done by 
+	building a Node class that held the index of a car and the car's VIN number.
+	The nodes were inserted into the LinkedList to avoid collisions of hash values,
+	and each VIN's hash value was related to a LinkedList, all of which were held
+	in an array. A diagram of the data structure is below:
+
+
+     INDIRECTION TABLE (LinkedList[])
+	 _______________________
+	|   |   |   |   |   |   | 
+	|_*_|_*_|_*_|_*_|_*_|_*_|         * = LinkedList reference
+	  |   |   |   |   |   |           -> = Reference to Node
+	  v   v   v   v   v   v		  0 = Node (made of [String VIN] and [int index])
+	  0   0           0   
+	      |
+              v
+	      0
+	
+	The hashing function took in the vehicle's VIN number and used Horner's Method
+	to weight the values of the characters in their respective locations, modding
+	this entire value with the size of the array, in this case 401. I chose 401 as
+	the size of the array because it seemed like a reasonable value to consider cars
+	as a single user... If you're comparing over 200 cars to other ones, you should
+	probably narrow your choices down a little bit. Note, however, that this is not 
+	a hard limit placed on the number of cars in the PQ; this is just the number of 
+	different hash values that can be accessed, with each respective hash value having
+	a LinkedList of indefinite length to hold cars. Once the hash value was found, 
+	the respective index was used to find the LinkedList stored in the array via 
+	fast indexing. At this point, although the hashing function needs to step through
+	all 17 values of the VIN, this is consistent across ALL cars, and as we've determined
+	our cars are the input, this can be considered to be done in O(1) constant time.
+	The fast-indexing of the array also allows for constant time runtime to be assumed.
+	Next was the traversal through the LinkedList (of type Node) which depended on the
+	number of cars who's VIN numbers hashed to the same address. Assuming that the VIN
+	numbers for cars are truly random numbers, and that a reasonable amount of cars would
+	be inserted into the PQ such as ~200 (and hence the Indirection Table), I made the
+	assumption that the cars would be accessible from the LinkedList in Constant Time, 
+	as only 1 to 2 cars would be placed in the LinkedList at a time. This totals to a 
+	complete runtime of the Indirection Table lookup, and hence a "Find" function in the
+	entire CarTracker file, to be constant ( O(1) ) time. :-)
+
+______________________________________________________________________________________________
+
+SPACE CONSIDERATIONS:
+
+
+Classes:
+	
+
+	Cars (~125 bytes):
+		Each Car class holds the following variables in it:
+		
+		1. String VIN (17 chars, total fo 17 bytes)
+		2. String make (1-35 chars, max of ~35 bytes)
+		3. String model (1-35 chars, max of ~35 bytes)
+		4. int price (4 bytes)
+		5. int mileage (4 bytes)
+		6. String color (1-20 chars, max of ~20 bytes)
+
+		Each Car has an arbitrary space requirements due to the different makes, 
+		models, and colors that cars can be. However, using the estimates above, 
+		we can assume that each Car object will be approximately 125 bytes of 
+		storage, using the maximum values estimated, and therefore worst-case.
+
+
+	Node (21 bytes):
+	
+		Each Node class holds the following variables:
+	
+		1. String VIN (17 chars, total of 17 bytes)
+		2. int index (4 bytes)
+
+		Therefore, the total for each Node created in the CarTracker will use 21 bytes.
+
+
+	LinkedList (20 bytes):
+
+		Each LinkedList class holds the following variables:
+
+		1. Node head (reference; 8 bytes)
+		2. Node tail (reference; 8 bytes)
+		3. int size (4 bytes)
+		
+		This puts each LinkedList class at a total of 20 bytes.
+
+
+Heap-Backed Data Structure:
+	
+	Each priority queue uses the following space requirements:
+	
+	1. array[] of Cars (array of references; 8 bytes * size of array m)
+	2. int n (4 bytes)
+	3. Comparator comparator (arbitrary value; for the purposes of asymptotic analysis, negligible)
+	4. LinkedList[] indirect (array of references; 8 bytes * size of array 401)
+
+	
+	This leads to an overhead of approximately 8*401 bytes + 4 bytes, or 3212 bytes, upon creation
+	of the heap-backed data structure. However, as cars are continued to be added to the priority queue,
+	this adds cars to the array[] and becomes 8*n bytes as the number of cars n increases. Additionally,
+	the car information is stored in a Node reference in the LinkedList, which is 21*n bytes, as well as
+	accounting for the car itself to be stored, which is 125*n bytes. In total, as the number of cars 
+	continues to increase, we see an asymptotic storage performance of O(3212 + (8+125+21)*n), but when
+	dropping lower-order terms and multiplicative constants, our storage considerations are linear O(n).
+
+
+CarTracker program:
+	
+	Each CarTracker program uses the structure defined above in non-input-defined terms. This means that 
+	multiplicative constants are applied to each of the above structures that are included in the entire
+	driver program, and hence it is safe to assumed that the asymptotic performance of storage space for
+	the program is linear O(n) in the worst-case. Look Ma, I did it :-)
+
+______________________________________________________________________________________________________________
+
+~~~~~~~~ END DOCUMENTATION.TXT ~~~~~~~~~~~~

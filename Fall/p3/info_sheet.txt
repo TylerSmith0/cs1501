@@ -1,0 +1,56 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  Tyler Smith
+
+Lecture section:  T/H 2:30pm-3:45pm
+
+Recitation day and time:  W 9-9:50am
+
+Assignment #:  P3
+
+Program due date:  10-29-2019
+
+Handed in date:  10-29-2019
+
+Source code file name(s):
+
+AptTracker.java
+MaxPQ.java
+MinPQ.java
+StdIn.java
+StdOut.java
+
+Other file name(s) (if relevant):
+
+apartments.txt
+info_sheet.txt
+documentation.txt
+
+Does your program run without error?: I doubt it
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+At the moment, removal and updating are not working. I am working through the retrievals 
+at the moment to work out bugs in capitalization of cities and the likes. The addition 
+seems to be going fine, and even re-prompts a user if they don't enter integers for the 
+ZIP code, rent, and square footage.
+
+
+
+
+
+Additional comments to the grader:
+
+
+
+
+
+
+

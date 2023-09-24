@@ -1,0 +1,61 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  Tyler Smith
+
+Lecture section:  T/H 2:30-3:45pm CS 1501 - Writing Section
+
+Recitation day and time:  W 9:00am
+
+Assignment #:  1
+
+Program due date:  9-25-2019 @ 11:59pm
+
+Handed in date:  9-25-2019 (probably around 11:58pm, I procrastinated this one I'm so sorry)
+
+Source code file name(s):
+ac_test.java
+DLBTrie.java
+DLBTrie.class
+DLBTrie$Node.class
+Node.class
+
+Other file name(s) (if relevant):
+dictionary.txt
+info_sheet.txt
+approach.txt
+READE.md.txt
+
+Does your program run without error?: This is a hard question to ask
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+Nothing that I really can see... It's also pretty late...
+
+
+
+
+
+Additional comments to the grader:
+
+Thanks for taking the time to actually read this. I'm probably gonna drop some 
+jokes in here and there. Give me some love.
+
+
+
+Two fish are swimming in the sea... One hits a wall. What does the other say?
+
+
+
+"Dam!"
+
+
+
+
+

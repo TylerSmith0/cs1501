@@ -1,0 +1,44 @@
+To begin, I decided to use the priority queue implementation from the textbook. This allowed
+me to at least get a jumpstart on creating the data structures and playing with some ideas 
+that I had.
+
+First and foremost, I created an inner class called Apartment which had a data section for 
+ZIP code (int), rent per month (int), square footage (int), street address (String), city 
+(String), and Unit Number (String).
+
+I decided that I was going to maintain numerous PQs in parallel with one another. I first 
+created two different PQs, a MaxPQ for Square Footage and a MinPQ for Rent. Then, I created 
+two Comparator classes within the AptTracket file, a RentComparator, which compares the rent
+values of two apartments, and a SqFtComparator, which compares square footage. I passed these
+in to the appropriate MinPQs and MaxPQs to overwrite what the standard comparison is based 
+off of. The MinPQ and MaxPQ functions needed the StdIn and StdOut files that the authors also
+provided, so I copied them into the folder as well.
+
+I then moved on to create an ArrayList of Cities, which was another class I created. The City
+class had a MaxPQ for Sq Foot of that city, a MinPQ for Rent in that city, and a name 
+section. This City List is how I was able to check if the user was entering a valid City 
+name or not, by doing a simple .equals().
+
+The reasons I did the following were for the runtime of the inserts. I am able to acheive a
+runtime of O(lg n) for an insert into any of the PQs, and to find the overall lowest rent or 
+highest SqFt, I can simply get the min() or max() of each PQ in O(1) time.
+
+For city-specific values, I am able to get O(c) where c is the number of cities included. I 
+used an ArrayList to hold the City values in place, and each City object has it's own set of
+PQs for lowest rent and highest SqFt. Therefore, assuming that the number of cities c is much
+smaller than the total number of apartments n, these returns will also generate O(lg n) 
+runtime, but as the number of cities rises compared to the number of apartments, this could 
+move to O(c) runtime.
+
+Finally, I intended on using a heapification for the Update setting, and changing rent and 
+sqft to mins and maxes and re-heapifying and using the removeMin and removeMax functions, but
+I didn't have the time to work the bugs out for the two. Therefore, the options exist in the
+home screen, but they will print out error statements and return to the home screen. Sorry I 
+couldn't get these working!
+
+With regards to memory, I am using a ton of memory to try to improve the runtime of the 
+application. My memory usage is coming in at around 4 times the size of a single PQ, since 
+each apartments is listed in not only a MinPQ for rent globally and a MaxPQ for sq ft, but I 
+also have the apartments listed in minPQs and maxPQs for the individual cities as well. When
+coupled with the overhead of the Iterator and other variable in a PQ, and the ArrayList of 
+the city list, this program uses a heck of a lot of memory.

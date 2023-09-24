@@ -1,0 +1,48 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  				Tyler Smith
+
+Lecture section:  		T/H 2:30pm - 3:45pm (W-Section)
+
+Recitation day and time:  	W 9:00am
+
+Assignment #:  			P2
+
+Program due date:  		10-13-2019
+
+Handed in date:  		10-11-2019
+
+Source code file name(s):
+MyLZW.java
+BinaryStdIn.java
+BinaryStdOut.java
+LZW.java
+Queue.java
+StdIn.java
+StdOut.java
+TST.java
+
+Other file name(s) (if relevant):
+info_sheet.txt
+result.txt
+
+Does your program run without error?: Yes! Woohoo!
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+N/A
+
+
+Additional comments to the grader:
+
+
+Thanks for putting up with my bologna!
+
+

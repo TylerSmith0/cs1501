@@ -1,0 +1,61 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  Tyler Smith
+
+Lecture section:  MW 9:30am (CS Non-W)
+
+Recitation day and time:  F 3pm
+
+Assignment #:  4
+
+Program due date:  4-3-2020
+
+Handed in date:  4-1-2020
+
+Source code file name(s):
+
+- NetworkAnalysis.java
+
+
+Other file name(s) (if relevant):
+
+- N / A
+
+
+Does your program run without error?:  Yes, but see below comments
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+- N / A
+
+
+Additional comments to the grader:
+
+- My interpretation of the third part of the problem (regarding vertex failures)
+  regards being able to GET TO every vertex. The way my program works is that if
+  a vertex fails, its edged become virtually non-existent in the OUTWARD direction
+  only. For the graph to still be connected, it must be able to access all vertices,
+  including the failed one, without any of the failed vertices' outbound edges.
+
+For example, if 2 and 3 were to fail in this graph:
+
+	0 -- 1 -- 2 -- 3
+
+I would consider this a NON-connected graph, since 2 is able to be accessed, but 3 cannot.
+
+However, if an edge were added from 1 to 3, like so:
+
+	0 -- 1 -- 2
+	      \   /
+		3
+
+This would be considered a CONNECTED graph.
+
+I hope this helps a bit!

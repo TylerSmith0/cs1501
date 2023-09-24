@@ -1,0 +1,20 @@
+I decided to use the data structure to keep track of a user's previous words 
+as simply another DLB Trie. This was solely based on the fact that I simply 
+didn't have time to think about another data structure.
+
+I realize after completing and submitting that using a priority queue of 
+some sort, whether it be merged with a Trie or not, would probably help me
+to specify even further what I wanted. However, I just don't have the time.
+
+I used the ArrayList<String> to store predictions of the user to make my 
+life easy, although it has O(n) resizing when necessary. However, since I 
+maintain only 5 strings in the arraylist at a time, this practically keeps 
+my runtime to that of O(1). I also use an ArrayList<String> to keep track 
+of all the user words that were entered and read in. This allows me to write 
+out to a file quickly and efficiently (with regards to programming). Again, 
+I would have used a quicker data structure were I to have more time, but for 
+the time being this is good enough.
+
+I also used some of the IO libraries from Java, I don't know much about them 
+so I'm just going to acknowledge that I used them and pretty much the extent 
+of my knowledge on them is what Oracle posts on their websites.

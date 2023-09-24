@@ -1,0 +1,7 @@
+I decided to use another DLB trie for my "user_history.txt" file because of the simplicity that
+it would provide. The dictionary had a very easy way to wrap your head around how the storage of 
+the words was, as was the actual maintenance of the text file used to generate the values. By 
+utilizing the same structure, I was able to model the user history off of the dictionary as well, 
+writing to individual lines as words are forced to be remembered with number entries or the $ 
+symbol. It also allows for my prediction generation to be the same code used for the dictionary
+and user history, allowing me the same runtime for both sets of data.
